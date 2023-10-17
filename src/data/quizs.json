@@ -1,0 +1,14 @@
+[
+  {
+    "question": "¿Cuál fué el juego del año de 2022?",
+    "answers": {
+      "options": [
+        "Elden Ring",
+        "God of War Ragnarok",
+        "Horizon Forbidden West",
+        "Stray"
+      ],
+      "correct": "Elden Ring"
+    }
+  }
+]

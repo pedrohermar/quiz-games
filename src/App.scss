@@ -1,18 +1,18 @@
 .quiz-container {
-  @apply w-96 h-80 rounded-xl p-2;
+  @apply w-96 h-80 rounded-xl p-4;
   
   margin: 0 auto;
   background-color: white;
 }
 
 .quiz-title {
-  @apply text-left;
+  @apply text-left mb-3;
 }
 
 .quiz-list {
-  @apply w-full flex flex-wrap h-full;
+  @apply w-full flex flex-col items-center;
 
   li {
-    @apply w-1/2;
+    @apply w-full;
   }
 }
