@@ -5,12 +5,15 @@ import { Answer } from "./components/Answer/Answer";
 
 function App() {
   const [quizs, setQuizs] = useState(null);
+  const [validate, setValidate] = useState(false);
 
   useEffect(() => {
     fetch("/src/data/quizs.json")
       .then((res) => res.json())
       .then((data) => setQuizs(data));
   }, []);
+
+  console.log("Se ha renderizado la aplicación");
 
   return (
     <>
@@ -21,11 +24,17 @@ function App() {
         {quizs ? (
           <>
             <h2 className="quiz-title">{quizs[0].question}</h2>
-            <ul className="quiz-list">
+            <ol className="quiz-list">
               {quizs[0].answers.options.map((quiz) => (
-                <Answer key={quiz} text={quiz} />
+                <Answer
+                  key={quiz}
+                  option={quiz}
+                  correct={quizs[0].answers.correct}
+                  validate={validate}
+                  setValidate={setValidate}
+                />
               ))}
-            </ul>
+            </ol>
           </>
         ) : (
           <h2>Todavía no se han cargado las preguntas</h2>

@@ -1,3 +1,19 @@
 li {
-    @apply m-2 p-2 border border-black rounded-lg;
+    @apply m-2 p-2 border-2 border-black rounded-lg cursor-pointer transition-all;
+
+    transition: all 0.1s;
+
+    &:hover {
+        @apply bg-orange-400;
+
+        transform: scale(1.03)
+    }
+}
+
+.correct {
+    @apply bg-green-600 hover:bg-green-700;
+}
+
+.incorrect {
+    @apply bg-red-600 hover:bg-red-700;
 }
