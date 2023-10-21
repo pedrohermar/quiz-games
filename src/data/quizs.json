@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "question": "¿Cuál fué el juego del año de 2022?",
     "answers": {
       "options": [
@@ -9,6 +10,19 @@
         "Stray"
       ],
       "correct": "Elden Ring"
+    }
+  },
+  {
+    "id": 2,
+    "question": "¿Cómo se llama el director de la saga Metal Gear?",
+    "answers": {
+      "options": [
+        "Shigeru Miyamoto",
+        "Hideo Kojima",
+        "Hidetaka Miyazaki",
+        "Tetsuya Nomura"
+      ],
+      "correct": "Hideo Kojima"
     }
   }
 ]
