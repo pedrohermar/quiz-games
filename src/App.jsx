@@ -3,10 +3,11 @@ import { useState } from "react";
 import "./App.scss";
 import { useEffect } from "react";
 import { Answer } from "./components/Answer/Answer";
+import { getRandomQuiz } from "./utils/getRandomQuiz";
 
 function App() {
   const [quizs, setQuizs] = useState([]);
-  const [currentQuiz, setCurrentQuiz] = useState(0);
+  const [currentQuiz, setCurrentQuiz] = useState({});
   const [validateMode, setValidateMode] = useState(false);
   const [turn, setTurn] = useState(1);
   const [score, setScore] = useState(0);
@@ -16,16 +17,14 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setQuizs(data);
-        selectCurrectQuiz(data);
+        setCurrentQuiz(getRandomQuiz(data));
       });
   }, []);
 
   useEffect(() => {
-    const updatedQuizs = quizs.filter(
-      (quiz) => quiz.id !== quizs[currentQuiz].id
-    );
-    selectCurrectQuiz(updatedQuizs);
+    const updatedQuizs = quizs.filter((quiz) => quiz.id !== currentQuiz.id);
     setQuizs(updatedQuizs);
+    setCurrentQuiz(getRandomQuiz(updatedQuizs));
     setValidateMode(false);
   }, [turn]);
 
@@ -41,26 +40,21 @@ function App() {
     }, 3000);
   };
 
-  const selectCurrectQuiz = (array) => {
-    const selectQuiz = Math.floor(Math.random() * array.length) ?? 0;
-    setCurrentQuiz(selectQuiz);
-  };
-
   return (
     <>
       <header className="quiz-header">
         <h1>Página de inicio</h1>
       </header>
       <main className="quiz-container">
-        {quizs.length > 0 ? (
+        {currentQuiz ? (
           <>
-            <h2 className="quiz-title">{quizs[currentQuiz].question}</h2>
+            <h2 className="quiz-title">{currentQuiz.question}</h2>
             <ol className="quiz-list">
-              {quizs[currentQuiz].answers.options.map((quiz) => (
+              {currentQuiz.answers.options.map((quiz) => (
                 <Answer
                   key={quiz}
                   option={quiz}
-                  correct={quizs[currentQuiz].answers.correct}
+                  correct={currentQuiz.answers.correct}
                   validateMode={validateMode}
                   toggleValidate={toggleValidate}
                 />
