@@ -46,7 +46,7 @@ function App() {
         <h1>Página de inicio</h1>
       </header>
       <main className="quiz-container">
-        {currentQuiz ? (
+        {quizs.length > 0 ? (
           <>
             <h2 className="quiz-title">{currentQuiz.question}</h2>
             <ol className="quiz-list">
