@@ -29,7 +29,7 @@
     "id": 3,
     "question": "¿Cuando saldrá Hollow Knight Silksong?",
     "answers": {
-      "options": ["2024", "2025", "2023", "Nunca"],
+      "options": ["2024", "2025", "2030", "Nunca"],
       "correct": "Nunca"
     }
   }

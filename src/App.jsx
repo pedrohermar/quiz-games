@@ -4,6 +4,7 @@ import "./App.scss";
 import { useEffect } from "react";
 import { Answer } from "./components/Answer/Answer";
 import { getRandomQuiz } from "./utils/getRandomQuiz";
+import { shuffleArray } from "./utils/shuffleArray";
 
 function App() {
   const [quizs, setQuizs] = useState([]);
@@ -16,6 +17,11 @@ function App() {
     fetch("/src/data/quizs.json")
       .then((res) => res.json())
       .then((data) => {
+        // Ordenar de forma aleatoria las respuestas de cada quiz
+        data.forEach((quiz) => {
+          quiz.answers.options = shuffleArray(quiz.answers.options);
+        });
+
         setQuizs(data);
         setCurrentQuiz(getRandomQuiz(data));
       });
