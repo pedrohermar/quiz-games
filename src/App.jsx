@@ -6,6 +6,8 @@ import { Answer } from "./components/Answer/Answer";
 import { getRandomQuiz } from "./utils/getRandomQuiz";
 import { shuffleArray } from "./utils/shuffleArray";
 
+const letter = ["A", "B", "C", "D"];
+
 function App() {
   const [quizs, setQuizs] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState({});
@@ -47,18 +49,23 @@ function App() {
   };
 
   return (
-    <>
+    <div className="quiz-games">
       <header className="quiz-header">
-        <h1>Página de inicio</h1>
+        <img
+          className="title"
+          src="quiz-games-title.png"
+          alt="logo of Quiz Games Page"
+        />
       </header>
       <main className="quiz-container">
         {quizs.length > 0 ? (
           <>
-            <h2 className="quiz-title">{currentQuiz.question}</h2>
+            <h1 className="quiz-title">{currentQuiz.question}</h1>
             <ol className="quiz-list">
-              {currentQuiz.answers.options.map((quiz) => (
+              {currentQuiz.answers.options.map((quiz, index) => (
                 <Answer
                   key={quiz}
+                  letter={letter[index]}
                   option={quiz}
                   correct={currentQuiz.answers.correct}
                   validateMode={validateMode}
@@ -75,7 +82,7 @@ function App() {
         <p>Turno: {turn}</p>
         <p>Score: {score}</p>
       </footer>
-    </>
+    </div>
   );
 }
 

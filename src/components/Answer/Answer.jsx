@@ -1,6 +1,12 @@
 import "./Answer.scss";
 
-export const Answer = ({ option, correct, validateMode, toggleValidate }) => {
+export const Answer = ({
+  option,
+  correct,
+  validateMode,
+  toggleValidate,
+  letter,
+}) => {
   const answerCheck = option === correct;
 
   const validateResult = (e) => {
@@ -21,7 +27,7 @@ export const Answer = ({ option, correct, validateMode, toggleValidate }) => {
       ${validateMode && answerCheck ? "correct" : ""}`}
       onClick={validateResult}
     >
-      {option}
+      {letter} - {option}
     </li>
   );
 };
