@@ -8,12 +8,12 @@ li {
 
         transform: scale(1.03)
     }
-}
 
-.correct {
-    @apply bg-green-600 hover:bg-green-700;
-}
+    &.correct {
+        @apply bg-green-600 hover:bg-green-700;
+    }
 
-.incorrect {
-    @apply bg-red-600 hover:bg-red-700;
+    &.incorrect {
+        @apply bg-red-600 hover:bg-red-700;
+    }
 }

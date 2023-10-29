@@ -5,15 +5,21 @@ import { useEffect } from "react";
 import { Answer } from "./components/Answer/Answer";
 import { getRandomQuiz } from "./utils/getRandomQuiz";
 import { shuffleArray } from "./utils/shuffleArray";
+import { ProgressBar } from "./components/ProgressBar/ProgressBar";
 
 const letter = ["A", "B", "C", "D"];
+
+const MAX_TURNS = 5;
 
 function App() {
   const [quizs, setQuizs] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState({});
   const [validateMode, setValidateMode] = useState(false);
   const [turn, setTurn] = useState(1);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState({
+    points: 0,
+    progress: new Array(MAX_TURNS).fill(null),
+  });
 
   useEffect(() => {
     fetch("/src/data/quizs.json")
@@ -39,9 +45,18 @@ function App() {
   const toggleValidate = (result) => {
     setValidateMode(true);
 
-    if (result) {
-      setScore(score + 1);
-    }
+    setScore((prevScore) => {
+      const { points, progress } = prevScore;
+
+      const newPoints = result ? points + 1 : points;
+      const newProgress = [...progress];
+      newProgress[turn - 1] = result;
+
+      return {
+        points: newPoints,
+        progress: newProgress,
+      };
+    });
 
     setTimeout(() => {
       setTurn(turn + 1);
@@ -80,7 +95,8 @@ function App() {
       </main>
       <footer className="text-white font-bold text-lg">
         <p>Turno: {turn}</p>
-        <p>Score: {score}</p>
+        <p>Score: {score.points}</p>
+        <ProgressBar progress={score.progress} turn={turn} />
       </footer>
     </div>
   );

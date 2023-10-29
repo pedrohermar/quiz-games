@@ -1,0 +1,48 @@
+.progress-bar {
+    @apply w-full h-8 bg-white rounded-xl flex overflow-hidden;
+
+    outline: 2px solid #24f903;
+    outline-offset: 2px;
+    background-color: white;
+
+    .progress-slot {
+        @apply flex-grow;
+    
+        &.correct {
+            @apply bg-green-500;
+        }
+    
+        &.incorrect {
+            @apply bg-red-500;
+        }
+    
+        &.current {
+            @apply bg-orange-500;
+    
+            animation: currentTurn 1.5s infinite ease;
+        }
+    }
+
+    hr {
+        @apply h-full border border-black;
+    }
+}
+
+
+@keyframes currentTurn {
+    0% {
+        opacity: 0;
+    }
+    25%{
+        opacity: 50%;
+    }
+    50%{
+        opacity: 80%;
+    }
+    75%{
+        opacity: 50%;
+    }
+    100%{
+        opacity: 0;
+    }
+}
