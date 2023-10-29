@@ -32,5 +32,142 @@
       "options": ["2024", "2025", "2030", "Nunca"],
       "correct": "Nunca"
     }
+  },
+  {
+    "id": 4,
+    "question": "¿Cuál es el mejor MMO actualmente?",
+    "answers": {
+      "options": [
+        "World of Warcraft",
+        "Black Desert Online",
+        "New World",
+        "Final Fantasy XIV"
+      ],
+      "correct": "Black Desert Online"
+    }
+  },
+  {
+    "id": 5,
+    "question": "¿Cuál es el juego mas vendido de la historia?",
+    "answers": {
+      "options": [
+        "Grand Theft Auto V",
+        "Minecraft",
+        "Tetris",
+        "Super Mario Bros"
+      ],
+      "correct": "Minecraft"
+    }
+  },
+  {
+    "id": 6,
+    "question": "¿En qué año se lanzó el primer 'The Legend of Zelda'?",
+    "answers": {
+      "options": ["1986", "1993", "2001", "2010"],
+      "correct": "1986"
+    }
+  },
+  {
+    "id": 7,
+    "question": "¿Cuál es el nombre del protagonista de la saga 'The Witcher'?",
+    "answers": {
+      "options": ["Geralt de Rivia", "Ciri", "Yennefer", "Triss Merigold"],
+      "correct": "Geralt de Rivia"
+    }
+  },
+  {
+    "id": 8,
+    "question": "¿En qué videojuego se encuentra la ciudad ficticia de Rapture?",
+    "answers": {
+      "options": ["Bioshock", "Half-Life", "Deus Ex", "Fallout"],
+      "correct": "Bioshock"
+    }
+  },
+  {
+    "id": 9,
+    "question": "¿Cuál es el primer videojuego de la serie 'Dark Souls'?",
+    "answers": {
+      "options": [
+        "Demon's Souls",
+        "Dark Souls II",
+        "Bloodborne",
+        "Sekiro: Shadows Die Twice"
+      ],
+      "correct": "Demon's Souls"
+    }
+  },
+  {
+    "id": 10,
+    "question": "¿Qué desarrolladora es conocida por la serie de juegos 'Halo'?",
+    "answers": {
+      "options": ["Bungie", "Bethesda Game Studios", "Bioware", "Epic Games"],
+      "correct": "Bungie"
+    }
+  },
+  {
+    "id": 11,
+    "question": "¿Cúal es el nombre del protagonísta del primer Assassin's Creed?",
+    "answers": {
+      "options": [
+        "Altaïr Ibn La-'Ahad",
+        "Ezio Auditore",
+        "Connor Kenway",
+        "Edward Kenway"
+      ],
+      "correct": "Altaïr Ibn La-'Ahad"
+    }
+  },
+  {
+    "id": 12,
+    "question": "¿Qué compañía desarrolladora creó el juego 'Rocket League'?",
+    "answers": {
+      "options": ["Psyonix", "Epic Games", "Blizzard Entertainment", "Valve"],
+      "correct": "Psyonix"
+    }
+  },
+  {
+    "id": 12,
+    "question": "¿Qué compañía desarrolladora creó el juego 'Rocket League'?",
+    "answers": {
+      "options": ["Psyonix", "Epic Games", "Blizzard Entertainment", "Valve"],
+      "correct": "Psyonix"
+    }
+  },
+  {
+    "id": 13,
+    "question": "¿Cómo se llama el protagostia de los juegos de 'The Legend of Zelda'?",
+    "answers": {
+      "options": ["Zelda", "Link", "Kratos", "Ganon"],
+      "correct": "Link"
+    }
+  },
+  {
+    "id": 14,
+    "question": "¿Cuál es el personaje principal del juego 'Uncharted'?",
+    "answers": {
+      "options": [
+        "Nathan Drake",
+        "John Marston",
+        "Solid Snake",
+        "Geralt de Rivia"
+      ],
+      "correct": "Nathan Drake"
+    }
+  },
+  {
+    "id": 15,
+    "question": "¿Cuál de los siguientes juegos pertenece al genero 'Metroidvania'?",
+    "answers": {
+      "options": ["League of Legends", "Fornite", "Hollow Knight", "Hades"],
+      "correct": "Hollow Knight"
+    }
+  },
+  {
+    "id": 16,
+    "question": "¿Qué compañía desarrolladora es conocida por la serie de juegos 'Fallout'?",
+    "answers": {
+      "options": ["Ubisoft", "Activision", "Epic Games", "Bethesda"],
+      "correct": "Bethesda"
+    }
   }
 ]

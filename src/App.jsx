@@ -36,6 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Actualizar el array eliminando el último quiz realizado al cambiar de turno
     const updatedQuizs = quizs.filter((quiz) => quiz.id !== currentQuiz.id);
     setQuizs(updatedQuizs);
     setCurrentQuiz(getRandomQuiz(updatedQuizs));
