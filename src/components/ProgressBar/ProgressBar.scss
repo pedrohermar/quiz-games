@@ -1,7 +1,7 @@
 .progress-bar {
     @apply w-full h-8 bg-white rounded-xl flex overflow-hidden;
 
-    outline: 2px solid #24f903;
+    outline: 4px solid #24f903;
     outline-offset: 2px;
     background-color: white;
 
@@ -19,7 +19,7 @@
         &.current {
             @apply bg-orange-500;
     
-            animation: currentTurn 1.5s infinite ease;
+            animation: currentTurn 1.5s infinite;
         }
     }
 

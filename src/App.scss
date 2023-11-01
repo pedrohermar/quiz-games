@@ -5,17 +5,20 @@
 }
 
 .quiz-container {
-  @apply rounded-xl p-4 outline outline-4 outline-offset-0 outline-lime-500;
+  @apply rounded-xl p-4 bg-gray-100;
 
   outline: 4px solid #24f903;
   outline-offset: 2px;
-  background-color: white;
 }
 
 .quiz-title {
-  @apply text-left mb-3;
+  @apply text-left mb-3 font-bold leading-5;
 }
 
 .quiz-list {
   @apply w-full flex flex-col items-center;
+}
+
+.quiz-footer {
+  @apply mt-7;
 }

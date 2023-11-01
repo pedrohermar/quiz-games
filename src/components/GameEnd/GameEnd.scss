@@ -1,0 +1,11 @@
+.game-end {
+    @apply font-bold;
+    
+    .score {
+        @apply text-6xl mt-3;
+    }
+
+    .restart-btn {
+        @apply mt-6 w-32 h-10 font-semibold cursor-pointer rounded-xl border-2 border-[#24f903] shadow-[inset_0px_-2px_0px_1px_#24f903] hover:bg-[#24f903] transition duration-300 ease-in-out;
+    }
+}

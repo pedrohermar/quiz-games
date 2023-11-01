@@ -100,7 +100,7 @@
     "id": 10,
     "question": "¿Qué desarrolladora es conocida por la serie de juegos 'Halo'?",
     "answers": {
-      "options": ["Bungie", "Bethesda Game Studios", "Bioware", "Epic Games"],
+      "options": ["Bungie", "Bethesda", "Bioware", "Epic Games"],
       "correct": "Bungie"
     }
   },
@@ -115,14 +115,6 @@
         "Edward Kenway"
       ],
       "correct": "Altaïr Ibn La-'Ahad"
-    }
-  },
-  {
-    "id": 12,
-    "question": "¿Qué compañía desarrolladora creó el juego 'Rocket League'?",
-    "answers": {
-      "options": ["Psyonix", "Epic Games", "Blizzard Entertainment", "Valve"],
-      "correct": "Psyonix"
     }
   },
   {
@@ -168,6 +160,14 @@
     "answers": {
       "options": ["Ubisoft", "Activision", "Epic Games", "Bethesda"],
       "correct": "Bethesda"
+    }
+  },
+  {
+    "id": 17,
+    "question": "¿Qué compañía desarrolladora es conocida por la serie de juegos 'Pokémon'?",
+    "answers": {
+      "options": ["Game Freak", "Nintendo", "Square Enix", "Capcom"],
+      "correct": "Game Freak"
     }
   }
 ]

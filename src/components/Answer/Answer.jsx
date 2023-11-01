@@ -1,22 +1,21 @@
 import "./Answer.scss";
+import { CorrectCIcon, IncorrectIcon } from "../../icons";
+import { useState } from "react";
 
 export const Answer = ({
   option,
   correct,
   validateMode,
   toggleValidate,
-  letter,
+  Letter,
 }) => {
+  const [selected, setSelected] = useState(false);
   const answerCheck = option === correct;
 
-  const validateResult = (e) => {
+  const handleClick = () => {
     if (validateMode) return;
 
-    if (answerCheck) {
-      e.target.classList.add("correct");
-    } else {
-      e.target.classList.add("incorrect");
-    }
+    setSelected(true);
 
     toggleValidate(answerCheck);
   };
@@ -24,10 +23,23 @@ export const Answer = ({
   return (
     <li
       className={`quiz-answer 
-      ${validateMode && answerCheck ? "correct" : ""}`}
-      onClick={validateResult}
+      ${
+        validateMode && answerCheck
+          ? "correct"
+          : validateMode && selected
+          ? "incorrect"
+          : null
+      }`}
+      onClick={handleClick}
     >
-      {letter} - {option}
+      <Letter /> {option}
+      <span className="check-icon">
+        {validateMode && answerCheck ? (
+          <CorrectCIcon />
+        ) : validateMode && selected ? (
+          <IncorrectIcon />
+        ) : null}
+      </span>
     </li>
   );
 };

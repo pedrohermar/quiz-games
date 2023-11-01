@@ -6,20 +6,23 @@ import { Answer } from "./components/Answer/Answer";
 import { getRandomQuiz } from "./utils/getRandomQuiz";
 import { shuffleArray } from "./utils/shuffleArray";
 import { ProgressBar } from "./components/ProgressBar/ProgressBar";
-
-const letter = ["A", "B", "C", "D"];
+import { LetterA, LetterB, LetterC, LetterD } from "./icons";
+import { GameEnd } from "./components/GameEnd/GameEnd";
 
 const MAX_TURNS = 5;
 
 function App() {
   const [quizs, setQuizs] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState({});
+  const [finish, setFinish] = useState(false);
   const [validateMode, setValidateMode] = useState(false);
   const [turn, setTurn] = useState(1);
-  const [score, setScore] = useState({
+  const [match, setMatch] = useState({
     points: 0,
     progress: new Array(MAX_TURNS).fill(null),
   });
+
+  const letters = [LetterA, LetterB, LetterC, LetterD];
 
   useEffect(() => {
     fetch("/src/data/quizs.json")
@@ -36,6 +39,9 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Comprobar si se ha terminado la partida
+    if (turn > MAX_TURNS) return setFinish(true);
+
     // Actualizar el array eliminando el último quiz realizado al cambiar de turno
     const updatedQuizs = quizs.filter((quiz) => quiz.id !== currentQuiz.id);
     setQuizs(updatedQuizs);
@@ -46,8 +52,8 @@ function App() {
   const toggleValidate = (result) => {
     setValidateMode(true);
 
-    setScore((prevScore) => {
-      const { points, progress } = prevScore;
+    setMatch((prevMatch) => {
+      const { points, progress } = prevMatch;
 
       const newPoints = result ? points + 1 : points;
       const newProgress = [...progress];
@@ -69,35 +75,37 @@ function App() {
       <header className="quiz-header">
         <img
           className="title"
-          src="quiz-games-title.png"
+          src="src/assets/quiz-games-title.png"
           alt="logo of Quiz Games Page"
         />
       </header>
       <main className="quiz-container">
-        {quizs.length > 0 ? (
-          <>
-            <h1 className="quiz-title">{currentQuiz.question}</h1>
-            <ol className="quiz-list">
-              {currentQuiz.answers.options.map((quiz, index) => (
-                <Answer
-                  key={quiz}
-                  letter={letter[index]}
-                  option={quiz}
-                  correct={currentQuiz.answers.correct}
-                  validateMode={validateMode}
-                  toggleValidate={toggleValidate}
-                />
-              ))}
-            </ol>
-          </>
+        {!finish ? (
+          quizs.length > 0 ? (
+            <>
+              <h1 className="quiz-title">{currentQuiz.question}</h1>
+              <ol className="quiz-list">
+                {currentQuiz.answers.options.map((quiz, index) => (
+                  <Answer
+                    key={quiz}
+                    Letter={letters[index]}
+                    option={quiz}
+                    correct={currentQuiz.answers.correct}
+                    validateMode={validateMode}
+                    toggleValidate={toggleValidate}
+                  />
+                ))}
+              </ol>
+            </>
+          ) : (
+            <h2>Todavía no se han cargado las preguntas</h2>
+          )
         ) : (
-          <h2>Todavía no se han cargado las preguntas</h2>
+          <GameEnd score={(match.points / MAX_TURNS) * 100} />
         )}
       </main>
-      <footer className="text-white font-bold text-lg">
-        <p>Turno: {turn}</p>
-        <p>Score: {score.points}</p>
-        <ProgressBar progress={score.progress} turn={turn} />
+      <footer className="quiz-footer">
+        <ProgressBar progress={match.progress} turn={turn} />
       </footer>
     </div>
   );
