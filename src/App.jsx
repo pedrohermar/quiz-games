@@ -8,35 +8,30 @@ import { shuffleArray } from "./utils/shuffleArray";
 import { ProgressBar } from "./components/ProgressBar/ProgressBar";
 import { LetterA, LetterB, LetterC, LetterD } from "./icons";
 import { GameEnd } from "./components/GameEnd/GameEnd";
+import useFetch from "./hooks/useFetch";
 
 const MAX_TURNS = 5;
+const initialMatch = {
+  points: 0,
+  progress: new Array(MAX_TURNS).fill(null),
+};
 
 function App() {
+  const { data, loading } = useFetch("/src/data/quizs.json");
+
   const [quizs, setQuizs] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState({});
   const [finish, setFinish] = useState(false);
   const [validateMode, setValidateMode] = useState(false);
   const [turn, setTurn] = useState(1);
-  const [match, setMatch] = useState({
-    points: 0,
-    progress: new Array(MAX_TURNS).fill(null),
-  });
+  const [match, setMatch] = useState(initialMatch);
 
   const letters = [LetterA, LetterB, LetterC, LetterD];
 
   useEffect(() => {
-    fetch("/src/data/quizs.json")
-      .then((res) => res.json())
-      .then((data) => {
-        // Ordenar de forma aleatoria las respuestas de cada quiz
-        data.forEach((quiz) => {
-          quiz.answers.options = shuffleArray(quiz.answers.options);
-        });
-
-        setQuizs(data);
-        setCurrentQuiz(getRandomQuiz(data));
-      });
-  }, []);
+    setQuizs(data);
+    setCurrentQuiz(getRandomQuiz(data));
+  }, [loading]);
 
   useEffect(() => {
     // Comprobar si se ha terminado la partida
@@ -70,6 +65,16 @@ function App() {
     }, 3000);
   };
 
+  const restartGame = () => {
+    setFinish(false);
+    setTurn(1);
+    setValidateMode(false);
+    setMatch(initialMatch);
+
+    setQuizs(data);
+    setCurrentQuiz(getRandomQuiz(data));
+  };
+
   return (
     <div className="quiz-games">
       <header className="quiz-header">
@@ -101,7 +106,10 @@ function App() {
             <h2>Todavía no se han cargado las preguntas</h2>
           )
         ) : (
-          <GameEnd score={(match.points / MAX_TURNS) * 100} />
+          <GameEnd
+            score={(match.points / MAX_TURNS) * 100}
+            restartGame={restartGame}
+          />
         )}
       </main>
       <footer className="quiz-footer">

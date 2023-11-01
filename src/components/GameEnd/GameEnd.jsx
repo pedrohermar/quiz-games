@@ -1,7 +1,7 @@
 import confetti from "canvas-confetti";
 import "./GameEnd.scss";
 
-export const GameEnd = ({ score }) => {
+export const GameEnd = ({ score, restartGame }) => {
   if (score >= 80) confetti();
   return (
     <div className="game-end">
@@ -19,7 +19,9 @@ export const GameEnd = ({ score }) => {
       >
         {score}%
       </p>
-      <button class="restart-btn">Volver a Jugar</button>
+      <button className="restart-btn" onClick={restartGame}>
+        Volver a Jugar
+      </button>
     </div>
   );
 };
