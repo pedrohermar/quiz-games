@@ -7,7 +7,7 @@ import { getRandomQuiz } from "./utils/getRandomQuiz";
 import { ProgressBar } from "./components/ProgressBar/ProgressBar";
 import { LetterA, LetterB, LetterC, LetterD } from "./icons";
 import { GameEnd } from "./components/GameEnd/GameEnd";
-import useFetch from "./hooks/useFetch";
+import useData from "./hooks/useData";
 import { GameInit } from "./components/GameInit/GameInit";
 
 const MAX_TURNS = 5;
@@ -17,11 +17,11 @@ const initialMatch = {
 };
 
 function App() {
-  const { data, loading } = useFetch("/src/data/quizs.json");
+  const { data, reloadData } = useData();
 
   const [quizs, setQuizs] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState({});
-  const [playing, setPlaying] = useState(false)
+  const [playing, setPlaying] = useState(false);
   const [finish, setFinish] = useState(false);
   const [validateMode, setValidateMode] = useState(false);
   const [turn, setTurn] = useState(1);
@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     setQuizs(data);
     setCurrentQuiz(getRandomQuiz(data));
-  }, [loading]);
+  }, [data]);
 
   useEffect(() => {
     // Comprobar si se ha terminado la partida
@@ -70,13 +70,12 @@ function App() {
 
   const restartGame = () => {
     setFinish(false);
-    setPlaying(false)
+    setPlaying(false);
     setTurn(1);
     setValidateMode(false);
     setMatch(initialMatch);
 
-    setQuizs(data);
-    setCurrentQuiz(getRandomQuiz(data));
+    reloadData();
   };
 
   return (
@@ -84,14 +83,14 @@ function App() {
       <header className="quiz-header">
         <img
           className="title"
-          src="src/assets/quiz-games-title.png"
+          src="/quiz-games-title.png"
           alt="logo of Quiz Games Page"
         />
       </header>
       <main className="quiz-container">
         {playing ? (
           !finish ? (
-            !loading ? (
+            quizs.length > 0 ? (
               <>
                 <h1 className="quiz-title">{currentQuiz.question}</h1>
                 <ol className="quiz-list">
@@ -111,11 +110,11 @@ function App() {
               <h2>Todavía no se han cargado las preguntas</h2>
             )
           ) : (
-          <GameEnd
-            score={(match.points / MAX_TURNS) * 100}
-            restartGame={restartGame}
-          />
-          ) 
+            <GameEnd
+              score={(match.points / MAX_TURNS) * 100}
+              restartGame={restartGame}
+            />
+          )
         ) : (
           <GameInit setPlaying={setPlaying} />
         )}
