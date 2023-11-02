@@ -38,10 +38,12 @@ function App() {
     if (turn > MAX_TURNS) return setFinish(true);
 
     // Actualizar el array eliminando el último quiz realizado al cambiar de turno
-    const updatedQuizs = quizs.filter((quiz) => quiz.id !== currentQuiz.id);
-    setQuizs(updatedQuizs);
-    setCurrentQuiz(getRandomQuiz(updatedQuizs));
-    setValidateMode(false);
+    if (turn > 1) {
+      const updatedQuizs = quizs.filter((quiz) => quiz.id !== currentQuiz.id);
+      setQuizs(updatedQuizs);
+      setCurrentQuiz(getRandomQuiz(updatedQuizs));
+      setValidateMode(false);
+    }
   }, [turn]);
 
   const toggleValidate = (result) => {
