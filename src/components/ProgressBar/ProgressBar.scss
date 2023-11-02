@@ -1,9 +1,8 @@
 .progress-bar {
-    @apply w-full h-8 bg-white rounded-xl flex overflow-hidden;
+    @apply w-full h-8 bg-gray-100 rounded-xl flex overflow-hidden;
 
     outline: 4px solid #24f903;
     outline-offset: 2px;
-    background-color: white;
 
     .progress-slot {
         @apply flex-grow;

@@ -4,11 +4,11 @@ import "./App.scss";
 import { useEffect } from "react";
 import { Answer } from "./components/Answer/Answer";
 import { getRandomQuiz } from "./utils/getRandomQuiz";
-import { shuffleArray } from "./utils/shuffleArray";
 import { ProgressBar } from "./components/ProgressBar/ProgressBar";
 import { LetterA, LetterB, LetterC, LetterD } from "./icons";
 import { GameEnd } from "./components/GameEnd/GameEnd";
 import useFetch from "./hooks/useFetch";
+import { GameInit } from "./components/GameInit/GameInit";
 
 const MAX_TURNS = 5;
 const initialMatch = {
@@ -21,6 +21,7 @@ function App() {
 
   const [quizs, setQuizs] = useState([]);
   const [currentQuiz, setCurrentQuiz] = useState({});
+  const [playing, setPlaying] = useState(false)
   const [finish, setFinish] = useState(false);
   const [validateMode, setValidateMode] = useState(false);
   const [turn, setTurn] = useState(1);
@@ -69,6 +70,7 @@ function App() {
 
   const restartGame = () => {
     setFinish(false);
+    setPlaying(false)
     setTurn(1);
     setValidateMode(false);
     setMatch(initialMatch);
@@ -87,35 +89,39 @@ function App() {
         />
       </header>
       <main className="quiz-container">
-        {!finish ? (
-          quizs.length > 0 ? (
-            <>
-              <h1 className="quiz-title">{currentQuiz.question}</h1>
-              <ol className="quiz-list">
-                {currentQuiz.answers.options.map((quiz, index) => (
-                  <Answer
-                    key={quiz}
-                    Letter={letters[index]}
-                    option={quiz}
-                    correct={currentQuiz.answers.correct}
-                    validateMode={validateMode}
-                    toggleValidate={toggleValidate}
-                  />
-                ))}
-              </ol>
-            </>
+        {playing ? (
+          !finish ? (
+            !loading ? (
+              <>
+                <h1 className="quiz-title">{currentQuiz.question}</h1>
+                <ol className="quiz-list">
+                  {currentQuiz.answers.options.map((quiz, index) => (
+                    <Answer
+                      key={quiz}
+                      Letter={letters[index]}
+                      option={quiz}
+                      correct={currentQuiz.answers.correct}
+                      validateMode={validateMode}
+                      toggleValidate={toggleValidate}
+                    />
+                  ))}
+                </ol>
+              </>
+            ) : (
+              <h2>Todavía no se han cargado las preguntas</h2>
+            )
           ) : (
-            <h2>Todavía no se han cargado las preguntas</h2>
-          )
-        ) : (
           <GameEnd
             score={(match.points / MAX_TURNS) * 100}
             restartGame={restartGame}
           />
+          ) 
+        ) : (
+          <GameInit setPlaying={setPlaying} />
         )}
       </main>
       <footer className="quiz-footer">
-        <ProgressBar progress={match.progress} turn={turn} />
+        {playing && <ProgressBar progress={match.progress} turn={turn} />}
       </footer>
     </div>
   );

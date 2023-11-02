@@ -5,14 +5,15 @@
 }
 
 .quiz-container {
-  @apply rounded-xl p-4 bg-gray-100;
+  @apply rounded-xl p-4 bg-gray-100 flex justify-center items-center flex-col;
 
+  min-height: 200px;
   outline: 4px solid #24f903;
   outline-offset: 2px;
 }
 
 .quiz-title {
-  @apply text-left mb-3 font-bold leading-5;
+  @apply text-left mb-3 font-bold leading-5 self-start;
 }
 
 .quiz-list {
